@@ -1,0 +1,35 @@
+/* USER CODE BEGIN 0 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if (huart == &huart2) {
+          HAL_UART_Transmit(&huart2, rx_buffer, rx_indx, 6);
+
+          HAL_UART_Receive_IT(&huart2, rx_data, 6);
+  }
+}
+/* USER CODE END 0 */
+
+ /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+	  HAL_UART_Transmit(&huart2, tx_buffer, sizeof(tx_buffer), 100);
+	  HAL_Delay(100);
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+
+//////////////////////////////////////////////////////////
+
+/* USER CODE BEGIN 0 */
+float temperature;
+float pressure;
+/* USER CODE END 0 */
+
+While(1)
+{
+	temperature = MS5611_GetTemperature(512);
+	HAL_Delay(50);
+	pressure = MS5611_GetPressure(512);
+	HAL_Delay(50);
+}
